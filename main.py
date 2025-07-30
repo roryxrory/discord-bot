@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 import os
 
-# إعداد Flask
+# السيرفر الخلفي لتشغيل البوت باستمرار
 app = Flask(__name__)
 
 @app.route('/')
@@ -18,7 +18,7 @@ def keep_alive():
     thread = Thread(target=run)
     thread.start()
 
-# إعداد البوت
+# إعدادات البوت
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -35,8 +35,20 @@ async def on_message(message):
 
     msg = message.content.lower()
 
+    # وينكم → يرد بصورة
     if "وينكم" in msg:
-        await message.channel.send("<:sad:1399948407233188102>")
+        try:
+            await message.channel.send(file=discord.File("sad.png"))
+        except Exception as e:
+            print(f"⚠️ Error sending sad.png: {e}")
+
+    # @everyone → يرد بإيموجي excited
+    if "@everyone" in msg:
+        await message.channel.send("<:excited:1399952577499500616>")
+
+    # منو سواج؟ → يرد بإسم و إيموجي
+    if "منو سواج؟" in msg:
+        await message.channel.send("رووووووووووري <:66:1399953120309809253>")
 
     await bot.process_commands(message)
 
