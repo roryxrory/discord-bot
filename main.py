@@ -52,6 +52,17 @@ async def on_message(message):
 
     await bot.process_commands(message)
 
+@bot.event
+async def on_message(message):
+    if message.author.bot:
+        return
+
+    content = message.content.lower()
+
+    if "وينكم" in content:
+        await message.channel.send("<:sad:1399948407233188102>")
+
+    await bot.process_commands(message)
 
 keep_alive()
 bot.run(os.getenv("DISCORD_TOKEN"))
