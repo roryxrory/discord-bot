@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: discord-bot
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: python3 main.py
+    envVars:
+      - key: DISCORD_TOKEN
+        sync: false
+    autoDeploy: true
