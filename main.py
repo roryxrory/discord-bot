@@ -35,8 +35,8 @@ async def on_message(message):
 
     msg = message.content.lower()
 
-    if "وينكم" in msg:
-        await message.channel.send("<:sad:1399948407233188102>")
+if "وينكم" in msg:
+    await message.channel.send(file=discord.File("sad.png"))
 
     await bot.process_commands(message)
 
