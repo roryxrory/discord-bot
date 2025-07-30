@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 import os
 
-# إعداد سيرفر Flask عشان يخلي البوت شغال على Replit/Render
+# إعداد Flask
 app = Flask(__name__)
 
 @app.route('/')
@@ -26,7 +26,7 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f'✅ Logged in as {bot.user}')
+    print(f"✅ Logged in as {bot.user}")
 
 @bot.event
 async def on_message(message):
@@ -35,11 +35,11 @@ async def on_message(message):
 
     msg = message.content.lower()
 
-if "وينكم" in msg:
-    await message.channel.send(file=discord.File("sad.png"))
+    if "وينكم" in msg:
+        await message.channel.send("<:sad:1399948407233188102>")
 
     await bot.process_commands(message)
 
-# إبقاء البوت شغال
+# تشغيل السيرفر والبوت
 keep_alive()
 bot.run(os.getenv("TOKEN"))
