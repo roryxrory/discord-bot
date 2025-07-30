@@ -30,5 +30,28 @@ async def on_ready():
 async def ping(ctx):
     await ctx.send("Pong!")
 
+@bot.event
+async def on_message(message):
+    if message.author.bot:
+        return
+
+    allowed_roles = [
+        "flame", "aqua", "rose", "Amethyst", "lemon", "sky",
+        "lilac", "ice", "blush", "navy", "red", "snow"
+    ]
+
+    msg = message.content.lower()
+
+    if msg in [r.lower() for r in allowed_roles]:
+        role = discord.utils.get(message.guild.roles, name=msg)
+        if role:
+            await message.author.add_roles(role)
+            await message.delete()
+        else:
+            print(f"Role '{msg}' not found.")
+
+    await bot.process_commands(message)
+
+
 keep_alive()
 bot.run(os.getenv("DISCORD_TOKEN"))
